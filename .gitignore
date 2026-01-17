@@ -1,0 +1,27 @@
+# Virtual environment
+.venv/
+
+# Environment variables
+.env
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Logs
+logs/
+*.log
+
+# Data lake (raw data should not be versioned)
+data/raw/
+
+# dbt artifacts
+target/
+dbt_packages/
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db

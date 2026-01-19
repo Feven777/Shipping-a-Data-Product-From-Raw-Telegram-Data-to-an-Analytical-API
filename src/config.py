@@ -7,3 +7,4 @@ class Config:
     TELEGRAM_API_ID = int(os.getenv("TELEGRAM_API_ID"))
     TELEGRAM_API_HASH = os.getenv("TELEGRAM_API_HASH")
     TELEGRAM_PHONE = os.getenv("TELEGRAM_PHONE")
+    BOOTSTRAP_MESSAGE_LIMIT = 300

@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: fct_image_detections
+    description: >
+      Fact table containing YOLO-based image detections
+      linked to Telegram messages and channels.
+
+    columns:
+      - name: message_id
+        description: "Unique Telegram message identifier associated with the image."
+        tests:
+          - not_null
+
+      - name: channel_key
+        description: "Foreign key referencing the Telegram channel."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_channels')
+                field: channel_key
+
+      - name: image_category
+        description: "Detected image category from YOLO model."
+        tests:
+          - not_null

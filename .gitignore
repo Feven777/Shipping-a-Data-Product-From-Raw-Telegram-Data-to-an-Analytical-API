@@ -15,7 +15,7 @@ logs/
 *.log
 
 # Data lake (raw data should not be versioned)
-data/raw/
+data
 
 # dbt artifacts
 target/

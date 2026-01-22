@@ -1,0 +1,83 @@
+version: 2
+
+models:
+  - name: stg_telegram_messages
+    description: >
+      Staging model for raw Telegram messages.
+      This model standardizes data types, applies basic cleaning,
+      and serves as the contract boundary between raw ingestion
+      and downstream analytical models.
+
+    tests:
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "message_id > 0"
+          config:
+            severity: warn
+
+    columns:
+      - name: message_id
+        description: "Unique identifier of the message within a Telegram channel."
+        tests:
+          - not_null:
+              arguments: {}
+              config:
+                severity: warn
+
+      - name: channel
+        description: "Name of the Telegram channel where the message was posted."
+        tests:
+          - not_null:
+              arguments: {}
+              config:
+                severity: warn
+
+      - name: message_date
+        description: "Timestamp when the message was published on Telegram."
+        tests:
+          - not_null:
+              arguments: {}
+              config:
+                severity: warn
+
+      - name: views
+        description: "Number of views the message has received."
+        tests:
+          - not_null:
+              arguments: {}
+              config:
+                severity: warn
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+              config:
+                severity: warn
+
+      - name: forwards
+        description: "Number of times the message was forwarded."
+        tests:
+          - not_null:
+              arguments: {}
+              config:
+                severity: warn
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+              config:
+                severity: warn
+
+      - name: has_media
+        description: "Indicates whether the message contains any media."
+        tests:
+          - not_null:
+              arguments: {}
+              config:
+                severity: warn
+
+      - name: ingestion_timestamp
+        description: "Timestamp when the record was ingested into the data warehouse."
+        tests:
+          - not_null:
+              arguments: {}
+              config:
+                severity: warn
